@@ -11,4 +11,14 @@
   * add main layout folder
   * add home template
   * add main template
+  * add partials folder
+5. Add home controller
+  * add controller to routes
+6. Setup Database - Mongoose 
+  * set strictQuery' to 'false'
+7. Authentication
+  * add authController
+  * add Login page and Register page GET actions
+  * add login and register page POST actions
+9. Add user model
 
