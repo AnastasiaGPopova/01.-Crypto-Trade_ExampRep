@@ -2,6 +2,7 @@ const express = require('express')
 const router = require('./routes.js')
 const handlebars = require('express-handlebars')
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -18,7 +19,7 @@ app.use('/static', express.static('public'))
 app.use(express.urlencoded({extended: false})) //before the router
 ////////////////////
 
-
+app.use(cookieParser)
 app.use(router)
 
 mongoose.set('strictQuery', false)

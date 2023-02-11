@@ -1,4 +1,5 @@
 const User = require('../model/User')
+const bcrypt = require('bcrypt')
 
 exports.register = async (username, email, password, rePassword) =>  {
 
@@ -12,7 +13,8 @@ exports.register = async (username, email, password, rePassword) =>  {
         throw new Error ('All fields are required!')
     }
 
+    const hashPassword = await bcrypt.hash(password, 10)
 
-    await User.create({username, email, password, rePassword})
+    await User.create({username, email, password: hashPassword})
 }
 

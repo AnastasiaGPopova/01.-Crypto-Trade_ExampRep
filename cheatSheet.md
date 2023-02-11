@@ -21,4 +21,6 @@
   * add Login page and Register page GET actions
   * add login and register page POST actions
 9. Add user model
+10. Add authService
+11. Configure bcrypt and cookie-parser
 
