@@ -1,6 +1,8 @@
 exports.parseError = (error) => {
     if(error.name == "ValidationError"){
-       return Object.values(error.errors).map(value => value.message)
+       let test = Object.values(error.errors).map(value => value.message)
+       console.log(test)
+       return test
     } else {
     return error.message.split('\n')
     }

@@ -29,9 +29,9 @@
     </header>
             {{#if errors}}
          <div>
-            {{#each error}}
             <div class="errorContainer">
-                <p>{{this}}</p>
+            {{#each errors}}
+               <p> {{this}} </p>
             {{/each}}
             </div>
         </div>

@@ -6,7 +6,7 @@ const cryptoSchema = new mongoose.Schema({
         required: true,
         //minLength: [6, "Too short! Title should be at least 6 characters !"]
     }, 
-        imageUrl: {
+    imageUrl: {
         type: String,
         required: true,
         // match: /^https?:\/\//
@@ -33,7 +33,7 @@ const cryptoSchema = new mongoose.Schema({
     method: {
         type: String,
         required: true,
-        enum: { values:["crypto-wallet", "credit-card", "debit-card, paypal"], message:'Payment method field can be only "crypto-wallet", "credit-card"or "debit-card, paypal" !'}
+        enum: { values:["crypto-wallet", "credit-card", "paypal"], message:'Payment method field can be only "crypto-wallet", "credit-card"or "paypal" !'}
        // minLength: [6, "Too short! Keyword should be at least 6 characters !"]
     },
     buyCryptoUsers:[{

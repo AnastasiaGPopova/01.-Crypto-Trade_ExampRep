@@ -23,7 +23,6 @@ exports.postCreatedCrypto = async (req, res) => {
         res.redirect('/')
 
     } catch(error){
-        console.log(error)
         const errors = parser.parseError(error)
         res.render('create', {errors})
     }
@@ -78,9 +77,7 @@ exports.getEditPage = async (req,res) => {
     if(!isOwner){
         res.redirect('/')
     } else {
-        console.log(currentCrypto.method)
         const methods = cryptoUtility.generateMethod(currentCrypto.method)
-        console.log(methods)
         res.render('edit', {currentCrypto, methods})
     }
 }
@@ -88,14 +85,15 @@ exports.getEditPage = async (req,res) => {
 
 
 exports.postEditedCrypto = async (req,res) => {
-    const {name, type, year, city, imageUrl, description, prices} = req.body
+    const {name, imageUrl, price, description, method} = req.body
+
     try{
-        if(!name || !type || !year || !city || !imageUrl || !description || !prices){
+        if(!name || !imageUrl || !price || !description || !method){
             throw new Error ("All fields are requiered!")
         }
-        const updatedHouse = await housingService.update(req.params.houseId,{name, type, year, city, imageUrl, description, prices} )//encoded body-to, which we receive, will create a new cube
+        const updatedCrypto = await cryptoService.update(req.params.cryptoId,{name, imageUrl, price, description, method} )//encoded body-to, which we receive, will create a new cube
 
-        res.redirect(`/${req.params.houseId}/details`)
+        res.redirect(`/${req.params.cryptoId}/details`)
 
     } catch(error){
         const errors = parser.parseError(error)
@@ -104,14 +102,14 @@ exports.postEditedCrypto = async (req,res) => {
 }
 
 
-exports.getDeleteHouse= async (req, res) => {
-    const house = await housingService.getOneHouse(req.params.houseId).populate('owner').lean()
-    const isOwner = houseUtility.isHouseOwner(req.user, house)
+exports.getDeleteCrypto= async (req, res) => {
+    const crypto = await cryptoService.getOneCrypto(req.params.cryptoId).populate('owner').lean()
+    const isOwner = cryptoUtility.isCryptoOwner(req.user, crypto)
 
     if(!isOwner){
         res.redirect('/')
     } else {
-   const test = await housingService.deleteHouse(req.params.houseId)
+   const test = await cryptoService.deleteCrypto(req.params.cryptoId)
    res.redirect('/')
     }
 }
@@ -119,14 +117,17 @@ exports.getDeleteHouse= async (req, res) => {
 exports.getSearchPage = async (req,res) => {
 
     let isSearched = false
-    res.render('search', {isSearched})
+    const allOffers = await cryptoService.getAllCryptos().lean()
+    res.render('search', {isSearched, allOffers})
 }
 
 exports.getSearchPagewithResults = async (req, res) => {
     let isSearched = true
-    const {searchedItem} = req.body
+    const {item, method} = req.body
+    console.log(item)
+    console.log(method)
 
-    const allMatches = await housingService.getSearchedbyType(searchedItem).lean()
+    const allMatches = await cryptoService.getSearchedby(item, method).lean()
     console.log(allMatches)
 
 

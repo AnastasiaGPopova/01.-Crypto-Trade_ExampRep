@@ -11,7 +11,7 @@
         <section id="edit-container">
             <div class="edit-container-info">
                 <h1>Edit Announcement</h1>
-                <form action="/edit" method="POST">
+                <form action="/{{currentCrypto._id}}/edit" method="POST">
                     <label>Name:</label>
                     <input type="text" id="name" name="name" value="{{currentCrypto.name}}">
                     <label>Image:</label>

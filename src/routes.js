@@ -40,12 +40,12 @@ router.get('/:cryptoId/buy', isAuthenticated, cryptoController.buy)
 router.get('/:cryptoId/edit', isAuthenticated, cryptoController.getEditPage)
 router.post('/:cryptoId/edit', isAuthenticated, cryptoController.postEditedCrypto)
 
-// // //Delete post
-// router.get('/:houseId/delete', isAuthenticated, houseController.getDeleteHouse)
+//Delete crypto
+router.get('/:cryptoId/delete', isAuthenticated, cryptoController.getDeleteCrypto)
 
-// // //search
-// router.get('/search', isAuthenticated, houseController.getSearchPage)
-// router.post('/search', isAuthenticated, houseController.getSearchPagewithResults)
+ //search
+router.get('/search', isAuthenticated, cryptoController.getSearchPage)
+router.post('/search', isAuthenticated, cryptoController.getSearchPagewithResults)
 
 
 router.get('/logout', authController.logout)
