@@ -1,5 +1,5 @@
 {
-  "name": "01.-crypto-trade_examprep",
+  "name": "real-estate-agency---examprep",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
@@ -9,15 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AnastasiaGPopova/01.-Crypto-Trade_ExampRep.git"
+    "url": "git+https://github.com/AnastasiaGPopova/Real-Estate-Agency---ExamPrep.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AnastasiaGPopova/01.-Crypto-Trade_ExampRep/issues"
+    "url": "https://github.com/AnastasiaGPopova/Real-Estate-Agency---ExamPrep/issues"
   },
-  "homepage": "https://github.com/AnastasiaGPopova/01.-Crypto-Trade_ExampRep#readme",
+  "homepage": "https://github.com/AnastasiaGPopova/Real-Estate-Agency---ExamPrep#readme",
+  "startDependencies": {
+    "nodemon": "^2.0.20"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",

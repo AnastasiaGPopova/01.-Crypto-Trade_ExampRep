@@ -1,15 +1,16 @@
 
 
     <main>
-        <!-- In case of error, you should display div with class "errorContainer" -->
-        <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-
-        <!-- <div>
+        {{#if errors}}
+         <div>
+            {{#each error}}
             <div class="errorContainer">
-                <p>Error</p>
+                <p>{{this}}</p>
+            {{/each}}
             </div>
-        </div> -->
-
+        </div>
+        {{/if}}
+        
         <div class="login-box">
             <h1>Login</h1>
             <form action="/login" method="POST">
@@ -22,4 +23,3 @@
             <p>Not have an account? <a href="/register">Register here</a></p>
         </div>
     </main>
-
