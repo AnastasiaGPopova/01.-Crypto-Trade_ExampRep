@@ -1,7 +1,7 @@
 //const Post = require('../models/Post.js')
 const User = require('../models/User')
 const { all } = require('../routes')
-const housingService = require('../services/cryptoService')
+const cryptoService = require('../services/cryptoService')
 
 
 exports.getHomePage = async (req, res) => {
@@ -12,8 +12,8 @@ exports.getHomePage = async (req, res) => {
 
 
 exports.getCatalogPage = async (req, res) => {
-        const allHouses = await housingService.getAllHouses().lean()
-        res.render('aprt-for-recent', {allHouses})
+        const allCryptos = await cryptoService.getAllCryptos().lean()
+        res.render('catalog', {allCryptos})
 }
 // exports.getProfilePage = async (req,res) => {
 //     const currentUser = await User.findById(req.user._id).lean()

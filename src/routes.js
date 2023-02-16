@@ -15,7 +15,7 @@ const {isAuthenticated} = require('./middlewares/authMiddleware.js')
 
 
 router.get('/', homeController.getHomePage)
-// router.get('/calalog', homeController.getCatalogPage)
+router.get('/catalog', homeController.getCatalogPage)
 
 
 // //Login and Register
@@ -30,12 +30,11 @@ router.post('/login', authController.postLoginUser)
 router.get('/create', isAuthenticated, cryptoController.getCryptoCreationPage )
 router.post('/create', isAuthenticated, cryptoController.postCreatedCrypto)
 
-//  //Details Page
-// router.get('/:houseId/details', houseController.getDetails)
+//Details Page
+router.get('/:cryptoId/details', cryptoController.getDetails)
 
-// // // //rent
-// router.get('/:houseId/rent', isAuthenticated, houseController.rent)
-// // router.get('/post/:postId/voteDown', isAuthenticated, postController.voteDown)
+//buy
+router.get('/:cryptoId/buy', isAuthenticated, cryptoController.buy)
 
 // //Edit page
 // router.get('/:houseId/edit', isAuthenticated, houseController.getEditPage)

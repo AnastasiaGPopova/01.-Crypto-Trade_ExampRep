@@ -23,6 +23,7 @@ exports.postCreatedCrypto = async (req, res) => {
         res.redirect('/')
 
     } catch(error){
+        console.log(error)
         const errors = parser.parseError(error)
         res.render('create', {errors})
     }
@@ -31,57 +32,40 @@ exports.postCreatedCrypto = async (req, res) => {
 
 exports.getDetails = async (req, res) => {
 
-    let currentHouse = await housingService.getOneHouse(req.params.houseId)//it makes a request to the DB and gives us back all accessories with all details and infos/not only the ID/
-                                       .populate('rentedHome') 
+    let currentCrypto = await cryptoService.getOneCrypto(req.params.cryptoId)//it makes a request to the DB and gives us back all accessories with all details and infos/not only the ID/
+                                       .populate('buyCryptoUsers') 
                                        .populate('owner')         
                                        .lean()
 
-     if(!currentHouse){
+     if(!currentCrypto){
     return res.redirect('/404')
       }
 
-let isLogged = false
-let rentedBy = currentHouse.rentedHome.map(x =>x.name)
-
-let isRented = true
-let isAvailable = true
-
-      
+let isLogged = false      
   
-if(rentedBy.length == 0){
-    isRented = false
-}
-  if(pieces == 0){
-          isAvailable = false
-}
-
-      rentedBy = rentedBy.join(', ')
-
 if(req.user){
     isLogged = true
+    const isOwner = cryptoUtility.isCryptoOwner(req.user, currentCrypto)
+    const isBoughtByCurrentUser= await cryptoUtility.isBougthbyUser(req.user._id, req.params.cryptoId)
+    console.log(isOwner)
+    console.log(isBoughtByCurrentUser)
 
-    
-    const isOwner = houseUtility.isHouseOwner(req.user, currentHouse)
-    const isRentedbyCurrentUser= await houseUtility.isRentedAlready(req.user._id, req.params.houseId)
-    console.log(isRentedbyCurrentUser)
-
-    res.render('details', {currentHouse, isOwner, isRentedbyCurrentUser, isRented, rentedBy, isAvailable, isLogged})
+    res.render('details', {currentCrypto, isLogged, isOwner, isBoughtByCurrentUser})
 } else {
-    res.render('details', {currentHouse, isRented, rentedBy, isLogged})
+    res.render('details', {currentCrypto, isLogged})
 }
 }
 
-exports.rent = async (req,res) =>{
-    const currentHouse = await housingService.getOneHouse(req.params.houseId)
-    const isOwner = houseUtility.isHouseOwner(req.user, currentHouse)
+exports.buy = async (req,res) =>{
+    const currentCrypto = await cryptoService.getOneCrypto(req.params.cryptoId)
+    const isOwner = cryptoUtility.isCryptoOwner(req.user, currentCrypto)
 
     if(isOwner){
         res.redirect('/')
     } else {
-    currentHouse.rentedHome.push(req.user._id)
-    currentHouse.prices--
-    await currentHouse.save()
-    res.redirect(`/${req.params.houseId}/details`)
+    currentCrypto.buyCryptoUsers.push(req.user._id)
+    await currentCrypto.save()
+    res.redirect(`/${req.params.cryptoId}/details`)
     }
 
 }
