@@ -1,16 +1,7 @@
 
 
     <main>
-        {{#if errors}}
-         <div>
-            {{#each error}}
-            <div class="errorContainer">
-                <p>{{this}}</p>
-            {{/each}}
-            </div>
-        </div>
-        {{/if}}
-        
+
         <div class="login-box">
             <h1>Login</h1>
             <form action="/login" method="POST">
