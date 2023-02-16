@@ -25,35 +25,31 @@ exports.isBougthbyUser = async (userId, cryptoId) => {
 }
 
 exports.generateMethod = function (currentMethod){ //prepare view data
+
+    // <option value="crypto-wallet">Crypto Wallet</option>
+    // <option value="credit-card">Credit Card</option>
+    // <option value="debit-card">Debit Card</option>
+    // <option value="paypal" selected>PayPal</option>
+
     const methods = [
         {
-            key: 1,
-            label: "Very easy",
+            key: "crypto-wallet",
+            label: "Crypto Wallet",
             selected: false
         },
         {
-            key: 2,
-            label: "Easy",
+            key: "credit-card",
+            label: "Credit Card",
             selected: false
         },
         {
-            key: 3,
-            label: "Medium (Standard 3x3)",
+            key: "debit-card",
+            label: "Debit Card",
             selected: false
         },
         {
-            key: 4,
-            label: "Intermediate",
-            selected: false
-        },
-        {
-            key: 5,
-            label: "Expert",
-            selected: false
-        },
-        {
-            key: 6,
-            label: "Hardcore",
+            key: "paypal",
+            label: "PayPal",
             selected: false
         }
     ]

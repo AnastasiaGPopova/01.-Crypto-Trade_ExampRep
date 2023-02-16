@@ -72,19 +72,22 @@ exports.buy = async (req,res) =>{
 
 
 exports.getEditPage = async (req,res) => {
-    const currentHouse = await housingService.getOneHouse(req.params.houseId).populate('owner').lean()
-    const isOwner = houseUtility.isHouseOwner(req.user, currentHouse)
+    const currentCrypto = await cryptoService.getOneCrypto(req.params.cryptoId).populate('owner').lean()
+    const isOwner = cryptoUtility.isCryptoOwner(req.user, currentCrypto)
 
     if(!isOwner){
         res.redirect('/')
     } else {
-        res.render('edit', {currentHouse})
+        console.log(currentCrypto.method)
+        const methods = cryptoUtility.generateMethod(currentCrypto.method)
+        console.log(methods)
+        res.render('edit', {currentCrypto, methods})
     }
 }
 
 
 
-exports.postEditedHouse = async (req,res) => {
+exports.postEditedCrypto = async (req,res) => {
     const {name, type, year, city, imageUrl, description, prices} = req.body
     try{
         if(!name || !type || !year || !city || !imageUrl || !description || !prices){

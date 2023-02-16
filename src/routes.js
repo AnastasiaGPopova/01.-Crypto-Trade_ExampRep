@@ -36,9 +36,9 @@ router.get('/:cryptoId/details', cryptoController.getDetails)
 //buy
 router.get('/:cryptoId/buy', isAuthenticated, cryptoController.buy)
 
-// //Edit page
-// router.get('/:houseId/edit', isAuthenticated, houseController.getEditPage)
-// router.post('/:houseId/edit', isAuthenticated, houseController.postEditedHouse)
+//Edit page
+router.get('/:cryptoId/edit', isAuthenticated, cryptoController.getEditPage)
+router.post('/:cryptoId/edit', isAuthenticated, cryptoController.postEditedCrypto)
 
 // // //Delete post
 // router.get('/:houseId/delete', isAuthenticated, houseController.getDeleteHouse)
