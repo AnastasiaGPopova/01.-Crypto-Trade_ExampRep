@@ -11,13 +11,14 @@ exports.getCryptoCreationPage = (req,res) => {
 }
 
 exports.postCreatedCrypto = async (req, res) => {
- const {name, type, year, city, imageUrl, description, prices} = req.body
+
+ const {name, imageUrl, price, description, method} = req.body
 
     try{
-        if(!name || !type || !year || !city || !imageUrl || !description || !prices){
+        if(!name || !imageUrl || !price || !description || !method){
             throw new Error ("All fields are requiered!")
         }
-        const newHouse = await housingService.createNewHouse({name, type, year, city, imageUrl, description, prices, owner: req.user._id})//encoded body-to, which we receive, will create a new cube
+        const newCrypto = await cryptoService.createNewCrypto({name, imageUrl, price, description, method, owner: req.user._id})//encoded body-to, which we receive, will create a new cube
         //redirect
         res.redirect('/')
 
